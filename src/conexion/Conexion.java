@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  * @author LN710Q
  */
 public class Conexion {
-    private String user;
+     private String user;
     private String pass;
     private String driver;
     private String url;
@@ -29,33 +29,29 @@ public class Conexion {
     public synchronized static Conexion conectar(){
         if(instance == null){
             return new Conexion();
-            
         }
         return instance;
-        
     }
     
-    private Conexion(){
+    private Conexion() {
         cargarCredenciales();
         
-        try{
+        try {
             Class.forName(this.driver);
-            cnx = (Connection) DriverManager.getConnection(this.url, this.user, this.pass);
-                      
-        }catch (ClassNotFoundException | SQLException ex){
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE,null, ex);
+            cnx = (Connection) DriverManager.getConnection(this.url, this.user,this.pass);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
     }
-
+    
     private void cargarCredenciales() {
         user = "root";
-        pass ="";
+        pass = "";//poner contrasena y ese user y pass que se usara para XAMP
         driver = "com.mysql.jdbc.Driver";
         url = "jdbc:mysql://localhost/filtros";
     }
-
-    public Connection getCnx() {
+    
+    public Connection getCnx(){
         return cnx;
     }
     
